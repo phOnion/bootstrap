@@ -1,0 +1,22 @@
+{
+  "name": "onion/bootstrap",
+  "description": "Onion framework application skeleton",
+  "type": "project",
+  "require": {
+    "php": "^7.0",
+    "roave/security-advisories": "dev-master",
+    "onion/interfaces": "~1.0 || dev-master",
+    "onion/framework": "~1.0 || 1.0.0-rc3",
+    "onion/rest": "dev-master"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-0": {
+      "Development\\": "src/"
+    }
+  }
+}
