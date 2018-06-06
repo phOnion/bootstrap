@@ -3,7 +3,6 @@ namespace Development\Cache;
 
 use Psr\SimpleCache\CacheInterface;
 use Psr\SimpleCache\DateInterval;
-use Psr\SimpleCache\iterable;
 
 class ArrayCache implements CacheInterface
 {

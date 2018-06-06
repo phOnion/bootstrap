@@ -1,6 +1,9 @@
 <?php declare(strict_types = 1);
 require_once __DIR__ . '/../vendor/autoload.php';
 
+use GuzzleHttp\Psr7\ServerRequest;
+use Onion\Framework\Application\Interfaces\ApplicationInterface;
+
 /**
  * Dependency container
  *
@@ -8,5 +11,5 @@ require_once __DIR__ . '/../vendor/autoload.php';
  */
 $container = include __DIR__ . '/../config/container.php';
 
-$container->get(\Onion\Framework\Application\Interfaces\ApplicationInterface::class)
-    ->run($container->get(\Psr\Http\Message\ServerRequestInterface::class));
+$container->get(ApplicationInterface::class)
+    ->run(ServerRequest::fromGlobals());

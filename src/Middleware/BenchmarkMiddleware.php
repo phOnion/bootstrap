@@ -1,10 +1,10 @@
 <?php declare(strict_types = 1);
 namespace App\Middleware;
 
-use Interop\Http\ServerMiddleware\DelegateInterface;
-use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 
 class BenchmarkMiddleware implements MiddlewareInterface
 {
@@ -14,17 +14,19 @@ class BenchmarkMiddleware implements MiddlewareInterface
      * to the next middleware component to create the response.
      *
      * @param ServerRequestInterface $request
-     * @param DelegateInterface $delegate
+     * @param RequestHandlerInterface $requestHandler
      *
      * @return ResponseInterface
      */
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $requestHandler): ResponseInterface
     {
         $start = memory_get_usage();
-        $response = $delegate->process($request);
+        $response = $requestHandler->handle($request);
         $end = memory_get_usage();
 
-        $response->getBody()->write(' -- Memory usage ' . round(($end - $start) / 1024, 3) . 'KB');
+        $stream = $response->getBody();
+        $stream->seek($stream->getSize() ?? 0);
+        $stream->write(' -- Memory usage ' . number_format(($end - $start) / 1024, 3) . 'KB');
 
         return $response;
     }

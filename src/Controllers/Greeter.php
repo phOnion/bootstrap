@@ -1,40 +1,33 @@
-<?php declare(strict_types = 1);
+<?php declare (strict_types = 1);
 namespace App\Controllers;
 
 use App\Entities\User;
-use Interop\Http\ServerMiddleware\DelegateInterface;
-use Interop\Http\ServerMiddleware\MiddlewareInterface;
+use Onion\Framework\Controller\RestController;
 use Onion\Framework\Http\Header\Accept;
-use Onion\Framework\Rest\Manager;
+use Onion\Framework\Rest\Response\JsonHalResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\RequestHandlerInterface;
+use Onion\Framework\Rest\Response\JsonPlainResponse;
+use Onion\Framework\Rest\Response\JsonApiResponse;
+use Onion\Framework\Rest\Response\JsonLdResponse;
 
-class Greeter implements MiddlewareInterface
+class Greeter extends RestController
 {
-    private $restManager;
-
-    public function __construct(Manager $manager)
+    public function get(ServerRequestInterface $request, RequestHandlerInterface $requestHandler)
     {
-        $this->restManager = $manager;
+        $user = new User();
+        $user->setName(ucwords($request->getAttribute('name', 'World!')));
+        $query = $request->getQueryParams();
+
+        return new JsonApiResponse(
+            $user->transform($query['includes'] ?? [], $query['fieHals'] ?? [])
+        );
     }
 
-    /**
-     * Process an incoming server request and return a response, optionally delegating
-     * to the next middleware component to create the response.
-     *
-     * @param ServerRequestInterface $request
-     * @param DelegateInterface $delegate
-     *
-     * @return ResponseInterface
-     */
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate): ResponseInterface
+    public function put(ServerRequestInterface $request, RequestHandlerInterface $requestHandler)
     {
-        $user = new User((string) rand(1, 10));
-
-        return $this->restManager->response(
-            new Accept($request->getHeaderLine('accept')),
-            $delegate->process($request),
-            $user->hydrate(['name' => $request->getAttribute('name', 'unknown')])
-        );
+        $user = new User();
+        return new JsonApiResponse($user->transform(), 201);
     }
 }

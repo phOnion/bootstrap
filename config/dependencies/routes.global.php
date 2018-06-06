@@ -5,15 +5,15 @@ return [
     [
         'pattern' => '/',
         'middleware' => [
+            \App\Middleware\BenchmarkMiddleware::class,
             Controller\Index::class
         ],
         'methods' => ['GET']
     ], [
-        'pattern' => '/greet[/[name]]',
+        'pattern' => '/greet{/{name}}?',
         'middleware' => [
-            \App\Middleware\BenchmarkMiddleware::class,
             Controller\Greeter::class
         ],
-        'methods' => ['GET']
+        'methods' => ['GET', 'PUT']
     ]
 ];

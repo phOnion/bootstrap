@@ -3,11 +3,11 @@
   "description": "Onion framework application skeleton",
   "type": "project",
   "require": {
-    "php": "^7.0",
+    "php": "^7.2",
     "roave/security-advisories": "dev-master",
-    "onion/interfaces": "~1.0 || dev-master",
-    "onion/framework": "~1.0 || 1.0.0-rc3",
-    "onion/rest": "dev-master"
+    "onion/interfaces": "^2.0",
+    "onion/framework": "^2.0",
+    "onion/rest": "^2.0"
   },
   "autoload": {
     "psr-4": {
