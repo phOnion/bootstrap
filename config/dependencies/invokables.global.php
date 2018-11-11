@@ -2,6 +2,6 @@
 
 use GuzzleHttp\Psr7\Response;
 
-return (object) [
+return [
     \Psr\Http\Message\ResponseInterface::class => Response::class,
 ];

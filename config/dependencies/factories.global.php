@@ -5,7 +5,7 @@ use Onion\Framework\Application\Interfaces\ApplicationInterface;
 use Onion\Framework\Http\Middleware\Factory\RequestHandlerFactory;
 use Psr\Http\Server\RequestHandlerInterface;
 
-return (object) [
+return [
     RequestHandlerInterface::class => RequestHandlerFactory::class,
     ApplicationInterface::class => ApplicationFactory::class,
 ];
