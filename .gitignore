@@ -3,3 +3,4 @@ vendor/
 modules/
 composer.lock
 *.generated.php
+config/modules.global.php
