@@ -2,8 +2,16 @@
 
 use function Onion\Framework\compileConfigFiles;
 use Onion\Framework\Dependency\Container;
+use function Onion\Framework\merge;
 
-$configs = (object) compileConfigFiles(__DIR__ . '/dependencies/', 'dev');
-// var_dump($configs);
-// exit;
-return new Container($configs);
+$iterator = new \DirectoryIterator(__DIR__ . '/dependencies/');
+$config = [];
+foreach ($iterator as $item) {
+    if ($item->isDot() || $item->isDir()) {
+        continue;
+    }
+
+    $config = merge($config, include $item->getRealPath());
+}
+
+return new Container($config);

@@ -3,4 +3,5 @@
 use Onion\Framework\Application\Middleware\ErrorResponseMiddleware;
 
 return [
+    'middleware' => [],
 ];

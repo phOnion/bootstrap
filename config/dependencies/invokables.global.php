@@ -3,5 +3,7 @@
 use GuzzleHttp\Psr7\Response;
 
 return [
-    \Psr\Http\Message\ResponseInterface::class => Response::class,
+    'invokables' => [
+        \Psr\Http\Message\ResponseInterface::class => Response::class,
+    ]
 ];
