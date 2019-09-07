@@ -1,9 +1,7 @@
 {
-    "name": "onion/bootstrap",
-    "version": "2.1.0",
-    "links": [],
-    "commands": [],
-    "repositories": [],
+    "name": "onion/template",
+    "version": "1.0.0",
+    "license": "MIT",
     "dependencies": [
         {
             "name": "daghostman/onion-swagger-generator",

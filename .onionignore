@@ -1,7 +1,6 @@
 .git/
-build/
 tests/
 config/
-modules
-vendor/
+modules/
 bin/
+*.phar

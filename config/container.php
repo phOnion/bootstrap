@@ -1,17 +1,12 @@
-<?php declare(strict_types = 1);
+<?php
 
-use function Onion\Framework\compileConfigFiles;
-use Onion\Framework\Dependency\Container;
-use function Onion\Framework\merge;
+use Onion\Framework\Dependency\ProxyContainer;
 
-$iterator = new \DirectoryIterator(__DIR__ . '/dependencies/');
-$config = [];
-foreach ($iterator as $item) {
-    if ($item->isDot() || $item->isDir()) {
-        continue;
-    }
+$containers = include __DIR__ . '/../container.generated.php';
 
-    $config = merge($config, include $item->getRealPath());
+$container = new ProxyContainer;
+foreach ($containers as $c) {
+    $container->attach($c);
 }
 
-return new Container($config);
+return $container;

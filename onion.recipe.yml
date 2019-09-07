@@ -1,0 +1,11 @@
+# config:
+#   reload-delay: 3000
+#   directories: [src/, config/, modules/, public/]
+#   extensions: ['php']
+#   port: 1337
+
+stages:
+  greet:
+    steps:
+      - command: echo
+        args: ["Hello, World"]
