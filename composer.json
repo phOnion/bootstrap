@@ -9,7 +9,7 @@
         "onion/framework": "dev-develop",
         "onion/rest": "dev-master",
         "onion/common": "dev-master",
-        "wikimedia/composer-merge-plugin": "^1.4",
+        "wikimedia/composer-merge-plugin": "^2.0",
         "onion/console": "dev-master",
         "onion/event-loop": "dev-master",
         "onion/promise": "dev-master",
